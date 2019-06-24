@@ -4,7 +4,7 @@
 #
 Name     : mvn-guice
 Version  : 4.2.1
-Release  : 2
+Release  : 3
 URL      : https://repo1.maven.org/maven2/com/google/inject/guice/4.2.1/guice-4.2.1-no_aop.jar
 Source0  : https://repo1.maven.org/maven2/com/google/inject/guice/4.2.1/guice-4.2.1-no_aop.jar
 Source1  : https://repo1.maven.org/maven2/com/google/inject/guice-parent/4.2.1/guice-parent-4.2.1.pom
@@ -33,11 +33,11 @@ data components for the mvn-guice package.
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/4.2.1
 cp %{SOURCE0} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/4.2.1
 
-mkdir -p %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/4.2.1
-cp %{SOURCE1} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/4.2.1
-
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice-parent/4.2.1
-cp %{SOURCE2} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice-parent/4.2.1
+cp %{SOURCE1} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice-parent/4.2.1
+
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/4.2.1
+cp %{SOURCE2} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/4.2.1
 
 
 %files
@@ -45,6 +45,6 @@ cp %{SOURCE2} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice
 
 %files data
 %defattr(-,root,root,-)
-/usr/share/java/.m2/repository/com/google/inject/guice-parent/4.2.1/guice-4.2.1.pom
+/usr/share/java/.m2/repository/com/google/inject/guice-parent/4.2.1/guice-parent-4.2.1.pom
 /usr/share/java/.m2/repository/com/google/inject/guice/4.2.1/guice-4.2.1-no_aop.jar
-/usr/share/java/.m2/repository/com/google/inject/guice/4.2.1/guice-parent-4.2.1.pom
+/usr/share/java/.m2/repository/com/google/inject/guice/4.2.1/guice-4.2.1.pom
