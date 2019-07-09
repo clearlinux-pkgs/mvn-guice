@@ -4,11 +4,13 @@
 #
 Name     : mvn-guice
 Version  : 4.2.1
-Release  : 3
+Release  : 4
 URL      : https://repo1.maven.org/maven2/com/google/inject/guice/4.2.1/guice-4.2.1-no_aop.jar
 Source0  : https://repo1.maven.org/maven2/com/google/inject/guice/4.2.1/guice-4.2.1-no_aop.jar
 Source1  : https://repo1.maven.org/maven2/com/google/inject/guice-parent/4.2.1/guice-parent-4.2.1.pom
-Source2  : https://repo1.maven.org/maven2/com/google/inject/guice/4.2.1/guice-4.2.1.pom
+Source2  : https://repo1.maven.org/maven2/com/google/inject/guice/3.0/guice-3.0.jar
+Source3  : https://repo1.maven.org/maven2/com/google/inject/guice/3.0/guice-3.0.pom
+Source4  : https://repo1.maven.org/maven2/com/google/inject/guice/4.2.1/guice-4.2.1.pom
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : Apache-2.0
@@ -36,8 +38,14 @@ cp %{SOURCE0} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice-parent/4.2.1
 cp %{SOURCE1} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice-parent/4.2.1
 
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/3.0
+cp %{SOURCE2} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/3.0
+
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/3.0
+cp %{SOURCE3} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/3.0
+
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/4.2.1
-cp %{SOURCE2} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/4.2.1
+cp %{SOURCE4} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/4.2.1
 
 
 %files
@@ -46,5 +54,7 @@ cp %{SOURCE2} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice
 %files data
 %defattr(-,root,root,-)
 /usr/share/java/.m2/repository/com/google/inject/guice-parent/4.2.1/guice-parent-4.2.1.pom
+/usr/share/java/.m2/repository/com/google/inject/guice/3.0/guice-3.0.jar
+/usr/share/java/.m2/repository/com/google/inject/guice/3.0/guice-3.0.pom
 /usr/share/java/.m2/repository/com/google/inject/guice/4.2.1/guice-4.2.1-no_aop.jar
 /usr/share/java/.m2/repository/com/google/inject/guice/4.2.1/guice-4.2.1.pom
