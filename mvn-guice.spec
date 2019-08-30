@@ -4,29 +4,37 @@
 #
 Name     : mvn-guice
 Version  : 3.0
-Release  : 10
+Release  : 11
 URL      : https://github.com/google/guice/archive/3.0.tar.gz
 Source0  : https://github.com/google/guice/archive/3.0.tar.gz
 Source1  : https://repo.maven.apache.org/maven2/com/google/inject/guice/4.0/guice-4.0-no_aop.jar
 Source2  : https://repo1.maven.org/maven2/com/google/inject/extensions/extensions-parent/3.0/extensions-parent-3.0.pom
 Source3  : https://repo1.maven.org/maven2/com/google/inject/extensions/extensions-parent/3.0/extensions-parent-3.0.pom
 Source4  : https://repo1.maven.org/maven2/com/google/inject/extensions/extensions-parent/4.0/extensions-parent-4.0.pom
-Source5  : https://repo1.maven.org/maven2/com/google/inject/guice-parent/3.0/guice-parent-3.0.pom
-Source6  : https://repo1.maven.org/maven2/com/google/inject/guice-parent/4.0/guice-parent-4.0.pom
-Source7  : https://repo1.maven.org/maven2/com/google/inject/guice-parent/4.2.1/guice-parent-4.2.1.pom
-Source8  : https://repo1.maven.org/maven2/com/google/inject/guice/3.0/guice-3.0.jar
-Source9  : https://repo1.maven.org/maven2/com/google/inject/guice/3.0/guice-3.0.pom
-Source10  : https://repo1.maven.org/maven2/com/google/inject/guice/4.0/guice-4.0.jar
-Source11  : https://repo1.maven.org/maven2/com/google/inject/guice/4.0/guice-4.0.pom
-Source12  : https://repo1.maven.org/maven2/com/google/inject/guice/4.2.1/guice-4.2.1-no_aop.jar
-Source13  : https://repo1.maven.org/maven2/com/google/inject/guice/4.2.1/guice-4.2.1.pom
-Source14  : https://repo1.maven.org/maven2/org/sonatype/sisu/inject/guice-bean/1.4.2/guice-bean-1.4.2.pom
-Source15  : https://repo1.maven.org/maven2/org/sonatype/sisu/inject/guice-bean/2.3.0/guice-bean-2.3.0.pom
-Source16  : https://repo1.maven.org/maven2/org/sonatype/sisu/inject/guice-parent/3.1.0/guice-parent-3.1.0.pom
+Source5  : https://repo1.maven.org/maven2/com/google/inject/guice-parent/2.0/guice-parent-2.0.pom
+Source6  : https://repo1.maven.org/maven2/com/google/inject/guice-parent/3.0/guice-parent-3.0.pom
+Source7  : https://repo1.maven.org/maven2/com/google/inject/guice-parent/4.0/guice-parent-4.0.pom
+Source8  : https://repo1.maven.org/maven2/com/google/inject/guice-parent/4.2.1/guice-parent-4.2.1.pom
+Source9  : https://repo1.maven.org/maven2/com/google/inject/guice/2.0/guice-2.0.jar
+Source10  : https://repo1.maven.org/maven2/com/google/inject/guice/2.0/guice-2.0.pom
+Source11  : https://repo1.maven.org/maven2/com/google/inject/guice/3.0/guice-3.0.jar
+Source12  : https://repo1.maven.org/maven2/com/google/inject/guice/3.0/guice-3.0.pom
+Source13  : https://repo1.maven.org/maven2/com/google/inject/guice/4.0/guice-4.0.jar
+Source14  : https://repo1.maven.org/maven2/com/google/inject/guice/4.0/guice-4.0.pom
+Source15  : https://repo1.maven.org/maven2/com/google/inject/guice/4.2.1/guice-4.2.1-no_aop.jar
+Source16  : https://repo1.maven.org/maven2/com/google/inject/guice/4.2.1/guice-4.2.1.pom
+Source17  : https://repo1.maven.org/maven2/org/sonatype/sisu/inject/guice-bean/1.4.2/guice-bean-1.4.2.pom
+Source18  : https://repo1.maven.org/maven2/org/sonatype/sisu/inject/guice-bean/2.1.1/guice-bean-2.1.1.pom
+Source19  : https://repo1.maven.org/maven2/org/sonatype/sisu/inject/guice-bean/2.3.0/guice-bean-2.3.0.pom
+Source20  : https://repo1.maven.org/maven2/org/sonatype/sisu/inject/guice-parent/2.9.4/guice-parent-2.9.4.pom
+Source21  : https://repo1.maven.org/maven2/org/sonatype/sisu/inject/guice-parent/3.1.0/guice-parent-3.1.0.pom
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : Apache-2.0
 Requires: mvn-guice-data = %{version}-%{release}
+Requires: mvn-guice-license = %{version}-%{release}
+BuildRequires : apache-ant
+BuildRequires : buildreq-mvn
 
 %description
 These libraries are not needed at runtime.
@@ -39,11 +47,22 @@ Group: Data
 data components for the mvn-guice package.
 
 
+%package license
+Summary: license components for the mvn-guice package.
+Group: Default
+
+%description license
+license components for the mvn-guice package.
+
+
 %prep
+%setup -q -n guice-3.0
 
 %build
 
 %install
+mkdir -p %{buildroot}/usr/share/package-licenses/mvn-guice
+cp COPYING %{buildroot}/usr/share/package-licenses/mvn-guice/COPYING
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/4.0
 cp %{SOURCE1} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/4.0/guice-4.0-no_aop.jar
 
@@ -56,41 +75,56 @@ cp %{SOURCE3} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/exten
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/com/google/inject/extensions/extensions-parent/4.0
 cp %{SOURCE4} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/extensions/extensions-parent/4.0/extensions-parent-4.0.pom
 
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice-parent/2.0
+cp %{SOURCE5} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice-parent/2.0/guice-parent-2.0.pom
+
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice-parent/3.0
-cp %{SOURCE5} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice-parent/3.0/guice-parent-3.0.pom
+cp %{SOURCE6} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice-parent/3.0/guice-parent-3.0.pom
 
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice-parent/4.0
-cp %{SOURCE6} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice-parent/4.0/guice-parent-4.0.pom
+cp %{SOURCE7} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice-parent/4.0/guice-parent-4.0.pom
 
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice-parent/4.2.1
-cp %{SOURCE7} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice-parent/4.2.1/guice-parent-4.2.1.pom
+cp %{SOURCE8} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice-parent/4.2.1/guice-parent-4.2.1.pom
+
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/2.0
+cp %{SOURCE9} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/2.0/guice-2.0.jar
+
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/2.0
+cp %{SOURCE10} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/2.0/guice-2.0.pom
 
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/3.0
-cp %{SOURCE8} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/3.0/guice-3.0.jar
+cp %{SOURCE11} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/3.0/guice-3.0.jar
 
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/3.0
-cp %{SOURCE9} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/3.0/guice-3.0.pom
+cp %{SOURCE12} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/3.0/guice-3.0.pom
 
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/4.0
-cp %{SOURCE10} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/4.0/guice-4.0.jar
+cp %{SOURCE13} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/4.0/guice-4.0.jar
 
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/4.0
-cp %{SOURCE11} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/4.0/guice-4.0.pom
+cp %{SOURCE14} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/4.0/guice-4.0.pom
 
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/4.2.1
-cp %{SOURCE12} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/4.2.1/guice-4.2.1-no_aop.jar
+cp %{SOURCE15} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/4.2.1/guice-4.2.1-no_aop.jar
 
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/4.2.1
-cp %{SOURCE13} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/4.2.1/guice-4.2.1.pom
+cp %{SOURCE16} %{buildroot}/usr/share/java/.m2/repository/com/google/inject/guice/4.2.1/guice-4.2.1.pom
 
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/sonatype/sisu/inject/guice-bean/1.4.2
-cp %{SOURCE14} %{buildroot}/usr/share/java/.m2/repository/org/sonatype/sisu/inject/guice-bean/1.4.2/guice-bean-1.4.2.pom
+cp %{SOURCE17} %{buildroot}/usr/share/java/.m2/repository/org/sonatype/sisu/inject/guice-bean/1.4.2/guice-bean-1.4.2.pom
+
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/sonatype/sisu/inject/guice-bean/2.1.1
+cp %{SOURCE18} %{buildroot}/usr/share/java/.m2/repository/org/sonatype/sisu/inject/guice-bean/2.1.1/guice-bean-2.1.1.pom
 
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/sonatype/sisu/inject/guice-bean/2.3.0
-cp %{SOURCE15} %{buildroot}/usr/share/java/.m2/repository/org/sonatype/sisu/inject/guice-bean/2.3.0/guice-bean-2.3.0.pom
+cp %{SOURCE19} %{buildroot}/usr/share/java/.m2/repository/org/sonatype/sisu/inject/guice-bean/2.3.0/guice-bean-2.3.0.pom
+
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/sonatype/sisu/inject/guice-parent/2.9.4
+cp %{SOURCE20} %{buildroot}/usr/share/java/.m2/repository/org/sonatype/sisu/inject/guice-parent/2.9.4/guice-parent-2.9.4.pom
 
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/sonatype/sisu/inject/guice-parent/3.1.0
-cp %{SOURCE16} %{buildroot}/usr/share/java/.m2/repository/org/sonatype/sisu/inject/guice-parent/3.1.0/guice-parent-3.1.0.pom
+cp %{SOURCE21} %{buildroot}/usr/share/java/.m2/repository/org/sonatype/sisu/inject/guice-parent/3.1.0/guice-parent-3.1.0.pom
 
 
 %files
@@ -100,9 +134,12 @@ cp %{SOURCE16} %{buildroot}/usr/share/java/.m2/repository/org/sonatype/sisu/inje
 %defattr(-,root,root,-)
 /usr/share/java/.m2/repository/com/google/inject/extensions/extensions-parent/3.0/extensions-parent-3.0.pom
 /usr/share/java/.m2/repository/com/google/inject/extensions/extensions-parent/4.0/extensions-parent-4.0.pom
+/usr/share/java/.m2/repository/com/google/inject/guice-parent/2.0/guice-parent-2.0.pom
 /usr/share/java/.m2/repository/com/google/inject/guice-parent/3.0/guice-parent-3.0.pom
 /usr/share/java/.m2/repository/com/google/inject/guice-parent/4.0/guice-parent-4.0.pom
 /usr/share/java/.m2/repository/com/google/inject/guice-parent/4.2.1/guice-parent-4.2.1.pom
+/usr/share/java/.m2/repository/com/google/inject/guice/2.0/guice-2.0.jar
+/usr/share/java/.m2/repository/com/google/inject/guice/2.0/guice-2.0.pom
 /usr/share/java/.m2/repository/com/google/inject/guice/3.0/guice-3.0.jar
 /usr/share/java/.m2/repository/com/google/inject/guice/3.0/guice-3.0.pom
 /usr/share/java/.m2/repository/com/google/inject/guice/4.0/guice-4.0-no_aop.jar
@@ -111,5 +148,11 @@ cp %{SOURCE16} %{buildroot}/usr/share/java/.m2/repository/org/sonatype/sisu/inje
 /usr/share/java/.m2/repository/com/google/inject/guice/4.2.1/guice-4.2.1-no_aop.jar
 /usr/share/java/.m2/repository/com/google/inject/guice/4.2.1/guice-4.2.1.pom
 /usr/share/java/.m2/repository/org/sonatype/sisu/inject/guice-bean/1.4.2/guice-bean-1.4.2.pom
+/usr/share/java/.m2/repository/org/sonatype/sisu/inject/guice-bean/2.1.1/guice-bean-2.1.1.pom
 /usr/share/java/.m2/repository/org/sonatype/sisu/inject/guice-bean/2.3.0/guice-bean-2.3.0.pom
+/usr/share/java/.m2/repository/org/sonatype/sisu/inject/guice-parent/2.9.4/guice-parent-2.9.4.pom
 /usr/share/java/.m2/repository/org/sonatype/sisu/inject/guice-parent/3.1.0/guice-parent-3.1.0.pom
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/mvn-guice/COPYING
