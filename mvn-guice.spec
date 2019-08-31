@@ -4,7 +4,7 @@
 #
 Name     : mvn-guice
 Version  : 3.0
-Release  : 11
+Release  : 12
 URL      : https://github.com/google/guice/archive/3.0.tar.gz
 Source0  : https://github.com/google/guice/archive/3.0.tar.gz
 Source1  : https://repo.maven.apache.org/maven2/com/google/inject/guice/4.0/guice-4.0-no_aop.jar
